@@ -1,0 +1,63 @@
+{% extends 'dashboard_app/base.html' %}
+
+{% block title %}Edit user {{ user.id }}{% endblock %}
+
+{% block content %}
+    {% for message in messages %}
+        <div class="ui {{ message.tags }} message">
+          <div class="header">
+              {{ message }}
+          </div>
+        </div>
+    {% endfor %}
+    <div id="page_header">
+        <h2 class="header">Edit Profile</h2>
+        <a href="/dashboard" class="ui primary button">Return to Dashboard</a>
+    </div>
+    <div id="profile_pw">
+        <div id="edit_profile" class="ui segment">
+            <form action="/users/{{ user.id }}/update" method="post">
+                {% csrf_token %}
+                <h4>First name:</h4>
+                <div class="ui input">
+                    <input type="text" name="first_name" value="{{ user.first_name }}" />
+                </div>
+                <h4>Last name:</h4>
+                <div class="ui input">
+                    <input type="text" name="last_name" value="{{ user.last_name }}" />
+                </div>
+                <h4>Email address:</h4>
+                <div class="ui input">
+                    <input type="text" name="email" value="{{ user.email }}" />
+                </div>
+                <h4>User level:</h4>
+                <div class="ui input">
+                    <select class="ui selection dropdown" name="level">
+                        {% if user.level.level == 'admin' %}
+                            <option selected value="admin">Admin</option>
+                            <option value="user">User</option>
+                        {% else %}
+                            <option value="admin">Admin</option>
+                            <option selected value="user">User</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <input type="submit" class="ui green button submit-btn" value="Save">
+            </form>
+        </div>
+        <div id="change_password" class="ui segment">
+            <form action="/users/{{ user.id }}/update_pw" method="post">
+                {% csrf_token %}
+                <h4>New password:</h4>
+                <div class="ui input">
+                    <input type="password" name="password"/>
+                </div>
+                <h4>Confirm password:</h4>
+                <div class="ui input">
+                    <input type="password" name="password_confirm"/>
+                </div>
+                <input type="submit" class="ui green button submit-btn" value="Update password">
+            </form>
+        </div>
+    </div>
+{% endblock %}

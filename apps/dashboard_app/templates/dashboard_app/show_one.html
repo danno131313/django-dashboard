@@ -1,0 +1,60 @@
+{% extends 'dashboard_app/base.html' %}
+
+{% block title %}Show user {{ user.id }}{% endblock %}
+
+{% block content %}
+    {% for message in messages %}
+        <div class="ui {{ message.tags }} message">
+          <div class="header">
+              {{ message }}
+          </div>
+        </div>
+    {% endfor %}
+    <div id="page_header">
+        <h2 class="header">{{ user.first_name }} {{ user.last_name }}</h2>
+        <a href="/dashboard" class="ui primary button">Return to Dashboard</a>
+    </div>
+    <p>Registered at: {{ user.created_at }}</p>
+    <p>User ID: {{ user.id }}</p>
+    <p>Email address: {{ user.email }}</p>
+    <p>Description: {{ user.desc }}</p>
+    {% if request.session.id == user.id or admin %}
+        <a href="/users/{{ user.id }}/edit" class="ui blue button submit-btn">Edit</a>
+    {% endif %}
+    {% if request.session.id != user.id %}
+        <form action="/users/{{ user.id }}/create_post" method="post" class="ui form" accept-charset="utf-8">
+            {% csrf_token %}
+            <h4 id="leave_message">Leave a message for {{ user.first_name }}</h4>
+            <div class="field">
+                <textarea name="message"></textarea>
+            </div>
+            <input type="submit" class="ui green button submit-btn"value="Post" />
+        </form>
+    {% endif %}
+    <div id="messages">
+        <h4>Messages:</h4>
+        {% for post in posts %}
+            <p><a href="/users/show/{{ post.poster.id }}">{{ post.poster.first_name }} {{ post.poster.last_name }}</a> wrote:</p>
+            <div class="ui segment">
+                <p>{{ post.content }}</p>
+            </div>
+            <div id="comments_wrapper">
+                <div class="comments">
+                    {% if post.has_comments %}
+                        {% for comment in post.comments.all %}
+                            <p class="commenter"><a href="/users/show/{{ comment.poster.id }}">{{ comment.poster.first_name }} {{ comment.poster.last_name }}</a> wrote:</p>
+                            <div class="ui segment">
+                                <p>{{ comment.content }}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <form action="/users/{{ user.id }}/post/{{ post.id }}/create_comment" class="ui form comment" method="post" accept-charset="utf-8">
+                        {% csrf_token %}
+                        <textarea name="comment" class="comment" rows="4" placeholder="Write a comment!"></textarea>
+                        <input type="submit" class="ui green button submit-btn" value="Save comment" />
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

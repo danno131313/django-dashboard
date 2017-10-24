@@ -1,0 +1,96 @@
+#board {
+    background-color: lightgrey;
+}
+
+#navtitle {
+    padding: 10px 20px 10px 20px;
+}
+
+#wrapper {
+    margin: 60px 50px;
+}
+
+#maininfo *, #maininfo {
+    border: none;
+}
+
+#maininfo div.thirds {
+    width: 30%;
+}
+
+label {
+    display: block;
+}
+
+form .submit-btn.button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+form h4 {
+    margin: 10px 0;
+}
+
+#edit_profile, #change_password {
+    width: 40%;
+}
+
+#profile_pw {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#profile_pw .segment {
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+#desc-box {
+    width: 100%;
+}
+
+#page_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#leave_message {
+    margin-top: 30px;
+}
+
+#navbar {
+    z-index: 10000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: -moz-linear-gradient(top, #e5e5e5 0%, #ffffff 50%, #e5e5e5 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #e5e5e5 0%,#ffffff 50%,#e5e5e5 100%); /* Chrome10-25,Safari5.1-6 */
+}
+
+#messages {
+    margin-top: 50px;
+}
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    width: 88%;
+}
+
+.commenter {
+    align-self: flex-start;
+}
+
+#comments_wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-evenly;
+}
