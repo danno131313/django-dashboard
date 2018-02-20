@@ -1,0 +1,41 @@
+{% extends 'dashboard_app/base.html' %}
+
+{% block title %}Add a new user{% endblock %}
+
+{% block content %}
+    {% for message in messages %}
+        <div class="ui {{ message.tags }} message">
+            <div class="header">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+    <div id="page_header">
+        <h2 class="header">Create a new user</h2>
+        <a href="/dashboard" class="ui primary button">Return to Dashboard</a>
+    </div>
+    <form action="/admin/create_user" method="post" accept-charset="utf-8">
+        {% csrf_token %}
+        <h4>First name:</h4>
+        <div class="ui input">
+            <input type="text" name="first_name" />
+        </div>
+        <h4>Last name:</h4>
+        <div class="ui input">
+            <input type="text" name="last_name" />
+        </div>
+        <h4>Email address:</h4>
+        <div class="ui input">
+            <input type="text" name="email" />
+        </div>
+        <h4>Password:</h4>
+        <div class="ui input">
+            <input type="password" name="password" />
+        </div>
+        <h4>Confirm password:</h4>
+        <div class="ui input">
+            <input type="password" name="password_confirm" />
+        </div>
+        <input type="submit" class="ui primary button submit-btn" value="Create user" />
+    </form>
+{% endblock %}

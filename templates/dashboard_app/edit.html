@@ -1,0 +1,67 @@
+{% extends 'dashboard_app/base.html' %}
+
+{% block title %}Edit my profile{% endblock %}
+
+{% block content %}
+    {% for message in messages %}
+        <div class="ui {{ message.tags }} message">
+          <div class="header">
+              {{ message }}
+          </div>
+        </div>
+    {% endfor %}
+    <div id="page_header">
+        <h2 class="header">Edit Profile</h2>
+        <a href="/dashboard" class="ui primary button">Return to Dashboard</a>
+    </div>
+    <div id="profile_pw">
+        <div id="edit_profile" class="ui segment">
+            <form action="/update" method="post">
+                {% csrf_token %}
+                <h4>First name:</h4>
+                <div class="ui input">
+                    <input type="text" name="first_name" value="{{ user.first_name }}" />
+                </div>
+                <h4>Last name:</h4>
+                <div class="ui input">
+                    <input type="text" name="last_name" value="{{ user.last_name }}" />
+                </div>
+                <h4>Email address:</h4>
+                <div class="ui input">
+                    <input type="text" name="email" value="{{ user.email }}" />
+                </div>
+                <input type="submit" class="ui green button submit-btn" value="Save">
+            </form>
+        </div>
+        <div id="change_password" class="ui segment">
+            <form action="/update_pw" method="post">
+                {% csrf_token %}
+                <h4>Current password:</h4>
+                <div class="ui input">
+                    <input type="password" name="password_current"/>
+                </div>
+                <h4>New password:</h4>
+                <div class="ui input">
+                    <input type="password" name="password_new"/>
+                </div>
+                <h4>Confirm password:</h4>
+                <div class="ui input">
+                    <input type="password" name="password_confirm"/>
+                </div>
+                <input type="submit" class="ui green button submit-btn" value="Update password">
+            </form>
+        </div>
+    </div>
+    <div>
+        <div class="ui segment">
+            <form action="/update_desc" class="ui form" method="post" accept-charset="utf-8">
+                {% csrf_token %}
+                <div class="field">
+                    <h4>Description:</h4>
+                    <textarea name="desc">{{ user.desc }}</textarea>
+                </div>
+                <input type="submit" class="ui green button submit-btn" value="Save" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'dashboard_app/base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    {% for message in messages %}
+        <div class="ui {{ message.tags }} message">
+            <div class="header">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+    <form action="/create" method="post" accept-charset="utf-8">
+        {% csrf_token %}
+        <h4>First name:</h4>
+        <div class="ui input">
+            <input type="text" name="first_name" />
+        </div>
+        <h4>Last name:</h4>
+        <div class="ui input">
+            <input type="text" name="last_name" />
+        </div>
+        <h4>Email address:</h4>
+        <div class="ui input">
+            <input type="text" name="email" />
+        </div>
+        <h4>Password:</h4>
+        <div class="ui input">
+            <input type="password" name="password" />
+        </div>
+        <h4>Confirm password:</h4>
+        <div class="ui input">
+            <input type="password" name="password_confirm" />
+        </div>
+        <input type="submit" class="ui primary button submit-btn" value="Create user" />
+    </form>
+    <a href="/login" >Already have an account? Log in!</a>
+{% endblock %}

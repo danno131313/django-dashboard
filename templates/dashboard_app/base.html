@@ -1,0 +1,55 @@
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width" />
+            <title>{% block title %}{% endblock %}</title>
+            {% load static %}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css">
+            <link rel="stylesheet" href="{% static 'dashboard_app/css/main.css' %}" type="text/css" media="all" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js"></script>
+            <script src="{% static 'dashboard_app/js/main.js' %}" charset="utf-8"></script>
+        </head>
+        <body>
+            <div id="navbar" class="ui secondary pointing menu">
+                <h3 id="navtitle" class="item header">Dashboard App</h1>
+                {% if loggedIn %}
+                    {% if request.path == '/dashboard' %}
+                        <a class="active item" href="/dashboard">Dashboard</a>
+                        <div class="ui left pointing dropdown item">
+                            Profile
+                            <div class="menu">
+                                <a class="item" href="/users/show/{{ request.session.id }}">View</a>
+                                <a class="item" href="/users/edit">Edit</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a class="item" href="/dashboard">Dashboard</a>
+                        <div class="ui left pointing dropdown item">
+                            Profile
+                            <div class="menu">
+                                <a class="item" href="/users/show/{{ request.session.id }}">View</a>
+                                <a class="item" href="/users/edit">Edit</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="right menu">
+                        <a class="ui item" href="/logout">Log out</a>
+                    </div>
+                {% else %}
+                    <a href="/" class="active item">
+                        Home
+                    </a>
+                    <div class="right menu">
+                        <a class="ui item" href="/login">
+                          Sign in
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            <div id="wrapper">
+                {% block content %}{% endblock %}
+            </div>
+        </body>
+    </html>

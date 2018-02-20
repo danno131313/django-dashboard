@@ -1,0 +1,27 @@
+{% extends 'dashboard_app/base.html' %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <div id="board" class="ui segment">
+        <h1>Welcome to the User Dashboard app!</h1>
+        <p>This is a cool app built for practice with managing users, built with Django, Semantic-UI,
+        and MariaDB.</p>
+        <a class="ui primary button" href="/register">Register</a>
+    </div>
+    <div id="maininfo" class="ui horizontal segments">
+        <div class="ui segment thirds">
+            <h3>Manage Users</h3>
+            <p>This application allows for adding, deleting, and editing users, as well as
+            managing them (if you have admin priviledges!)</p>
+        </div>
+        <div class="ui segment thirds">
+            <h3>Leave messages</h3>
+            <p>Users are able to leave messages to other users using this application.</p>
+        </div>
+        <div class="ui segment thirds">
+            <h3>Edit User Information</h3>
+            <p>Admins are able to edit other users' info, including email address, first name, last name, user permissions, etc.</p>
+        </div>
+    </div>
+{% endblock %}

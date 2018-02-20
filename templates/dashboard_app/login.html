@@ -1,0 +1,26 @@
+{% extends 'dashboard_app/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    {% for message in messages %}
+        <div class="ui {{ message.tags }} message">
+          <div class="header">
+              {{ message }}
+          </div>
+        </div>
+    {% endfor %}
+    <form action="/login_submit" method="post" accept-charset="utf-8">
+        {% csrf_token %}
+        <h4>Email address:</h4>
+        <div class="ui input">
+            <input type="text" name="email" />
+        </div>
+        <h4>Password:</h4>
+        <div class="ui input">
+            <input type="password" name="password" />
+        </div>
+        <input type="submit" class="ui primary button submit-btn" value="Log in" />
+    </form>
+    <a href="/register" >Don't have an account? Register now!</a>
+{% endblock %}

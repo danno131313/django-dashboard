@@ -1,0 +1,43 @@
+{% extends 'dashboard_app/base.html' %}
+
+{% block title %}Your Dashboard{% endblock %}
+
+{% block content %}
+    {% for message in messages %}
+    <div class="ui {{ message.tags }} message">
+            <div class="header">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+    <a class="ui green button" href="/users/new">New user</a>
+    <div id="modal">
+    </div>
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email address</th>
+                <th>Created at</th>
+                <th>User level</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td><a href="/users/show/{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</a></td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.created_at }}</td>
+                    <td>{{ user.level.level }}</td>
+                    <td class="actions">
+                        <a href="/users/{{ user.id }}/edit" class="ui primary button">Edit</a>
+                        <button class="delete button red ui" value="{{ user.id }}">Delete</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
